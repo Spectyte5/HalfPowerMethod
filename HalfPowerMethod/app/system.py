@@ -14,6 +14,11 @@ class System:
     def find_peaks(self):
         sc.signal.find_peaks(self.x)
 
+def my_figure():
+    fig, ax = plt.subplots()
+    ax.plot([1, 3, 4], [3, 2, 5])
+    return fig
+
 def draw_figure():
 
     x = np.arange(0,np.pi*3,.1)
