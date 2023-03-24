@@ -1,7 +1,3 @@
-"""
-Definition of forms.
-"""
-
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
@@ -16,3 +12,9 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
+
+
+class CreateNewList(forms.Form):
+    transfer = forms.CharField(max_length=100)
+    function = forms.CharField(max_length=100)
+    time = forms.IntegerField()

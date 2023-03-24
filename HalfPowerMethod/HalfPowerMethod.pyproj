@@ -32,9 +32,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\figures.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\halfpower.py">
@@ -66,6 +63,7 @@
     <Folder Include="HalfPowerMethod\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\result.html" />
     <Content Include="app\templates\app\app.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />

@@ -1,14 +1,14 @@
-"""
-Definition of views.
-"""
-
+from audioop import reverse
+from contextlib import redirect_stderr
 from datetime import datetime
+from re import T
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from .system import *
+from .forms import CreateNewList
+from .models import Input
 
 def home(request):
-    """Renders the home page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -20,7 +20,6 @@ def home(request):
     )
 
 def contact(request):
-    """Renders the contact page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -33,7 +32,6 @@ def contact(request):
     )
 
 def about(request):
-    """Renders the about page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -46,8 +44,18 @@ def about(request):
     )
 
 def app(request):
-    """Renders the about page."""
     assert isinstance(request, HttpRequest)
+    if request.method == "POST":
+        form = CreateNewList(request.POST)
+        if form.is_valid():
+            tf = form.cleaned_data["transfer"]
+            f = form.cleaned_data["function"]
+            t = form.cleaned_data["time"]
+            n = Input(transfer = tf,function = f,time =t)
+            n.save()
+        return HttpResponseRedirect('/result')
+    else:
+        form = CreateNewList()
     return render(
         request,
         'app/app.html',
@@ -55,6 +63,20 @@ def app(request):
             'title':'App',
             'message':'Your application page.',
             'year':datetime.now().year,
-            'graph':draw_figure()
+            'form':form,
+        }
+    )
+
+def result(request):
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/result.html',
+        {   
+            'title':'Result',
+            'message':'Your result page.',
+            'year':datetime.now().year,
+            'graph':draw_figure(),
+            'input':Input.objects.last()
         }
     )
