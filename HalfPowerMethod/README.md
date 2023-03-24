@@ -1,0 +1,1 @@
+Half power method
