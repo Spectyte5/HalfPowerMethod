@@ -15,6 +15,10 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 
 
 class CreateNewList(forms.Form):
-    transfer = forms.CharField(max_length=100)
-    function = forms.CharField(max_length=100)
-    time = forms.IntegerField()
+    # transfer function:
+    Numerator = forms.CharField(max_length=20)
+    Denominator = forms.CharField(max_length=20)
+    # Frequency
+    Freq_start = forms.FloatField()
+    Freq_stop = forms.FloatField()
+    Samples = forms.IntegerField()
