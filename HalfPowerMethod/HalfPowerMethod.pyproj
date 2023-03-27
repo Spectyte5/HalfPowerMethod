@@ -63,6 +63,7 @@
     <Folder Include="HalfPowerMethod\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\freq.jpg" />
     <Content Include="app\static\app\content\main.css">
       <SubType>Code</SubType>
     </Content>
