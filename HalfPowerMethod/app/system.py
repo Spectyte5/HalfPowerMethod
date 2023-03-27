@@ -36,6 +36,8 @@ def draw_figure(x,y):
 
     fig = plt.figure()
     plt.plot(x,y)
+    plt.xlabel("Freq (Hz)")
+    plt.ylabel("Magnitude (a.u)")
 
     imgdata = StringIO()
     fig.savefig(imgdata, format='svg')

@@ -5,8 +5,7 @@
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Input your data</legend>
-            <p>For Transfer function provide data seperated with spaces: num = 1 0 and den = 1 2 1</p>
+            <legend class="border-bottom mb-4">Input your data:</legend>
             <table>
                 {{ form.as_table }}
             </table>

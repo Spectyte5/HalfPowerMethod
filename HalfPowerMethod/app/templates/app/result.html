@@ -6,21 +6,21 @@
 <h2> Natural Frequencies: </h2>
 {% for n in nat %}
 <tr>
-    <td>Natural frequency {{ forloop.counter }}: {{ n }} Hz </td>
+    <td>&omega;<sub>{{ forloop.counter }}</sub> = {{ n }} Hz </td>
 </tr>
 <br>
 {% endfor %}
-<h2> Damping: </h2>
+<h2> Damping Ratios: </h2>
 {% for damp in damping %}
 <tr>
-    <td>Damping {{ forloop.counter }}: {{ damp }}</td>
+    <td>&zeta;<sub>{{ forloop.counter }}</sub> = {{ damp }}</td>
 </tr>
 <br>
 {% endfor %}
-<h2> Quality: </h2>
+<h2> Quality Factors: </h2>
 {% for q in quality %}
 <tr>
-    <td>Quality factor {{ forloop.counter }}: {{ q }}</td>
+    <td>Q<sub>{{ forloop.counter }}</sub> = {{ q }}</td>
 </tr>
 <br>
 {% endfor %}

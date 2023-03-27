@@ -83,3 +83,13 @@ a.article-title:hover {
     font-size: 2.5rem;
 }
 
+.jumbotron {
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: white;
+    background-image: url("freq.jpg");
+    background-position: right center;
+}
