@@ -1,18 +1,21 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-<h3>Main app section</h3>
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Input your data</legend>
-            {{ form }}
+            <p>For Transfer function provide data seperated with spaces: num = 1 0 and den = 1 2 1</p>
+            <table>
+                {{ form.as_table }}
+            </table>
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Submit</button>
         </div>
     </form>
 </div>
+
 
 {% endblock %}

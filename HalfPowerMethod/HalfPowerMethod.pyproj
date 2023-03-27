@@ -63,10 +63,12 @@
     <Folder Include="HalfPowerMethod\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\main.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\templates\app\result.html" />
     <Content Include="app\templates\app\app.html" />
     <Content Include="requirements.txt" />
-    <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
     <Content Include="app\static\app\content\bootstrap.min.css" />
     <Content Include="app\static\app\content\site.css" />

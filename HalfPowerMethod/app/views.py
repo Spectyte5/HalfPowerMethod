@@ -1,12 +1,8 @@
-from audioop import reverse
-from contextlib import redirect_stderr
 from datetime import datetime
-from re import T
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpRequest
 from .system import *
 from .forms import CreateNewList
-from .models import Input
 
 def home(request):
     assert isinstance(request, HttpRequest)
@@ -48,12 +44,40 @@ def app(request):
     if request.method == "POST":
         form = CreateNewList(request.POST)
         if form.is_valid():
-            tf = form.cleaned_data["transfer"]
-            f = form.cleaned_data["function"]
-            t = form.cleaned_data["time"]
-            n = Input(transfer = tf,function = f,time =t)
-            n.save()
-        return HttpResponseRedirect('/result')
+            # load data from input
+            Num = form.cleaned_data["Numerator"]
+            Den = form.cleaned_data["Denominator"]
+            Freq0 = form.cleaned_data["Freq_start"]
+            Freq1 = form.cleaned_data["Freq_stop"]
+            N = form.cleaned_data["Samples"]
+            num = []
+            den = []
+            # parse data
+            for s in Num.split():
+                num_double = float(s)
+                num.append(num_double)
+            for s in Den.split():
+                den_double = float(s)
+                den.append(den_double)
+            sys = signal.TransferFunction(num, den)
+            freq = np.logspace(Freq0, Freq1, N)
+            # create object
+            system1 = System(sys,freq)
+            # calculate damping
+            system1.calc_damping()
+            return render(
+                request,
+                'app/result.html',
+                    {   
+                        'title':'Result',
+                        'message':'Your result page.',
+                        'year':datetime.now().year,
+                        'freq_graph': draw_figure(system1.freq, system1.fft),
+                        'nat': system1.nat,
+                        'quality': system1.q,
+                        'damping': system1.damping
+                    }
+            )
     else:
         form = CreateNewList()
     return render(
@@ -64,19 +88,5 @@ def app(request):
             'message':'Your application page.',
             'year':datetime.now().year,
             'form':form,
-        }
-    )
-
-def result(request):
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/result.html',
-        {   
-            'title':'Result',
-            'message':'Your result page.',
-            'year':datetime.now().year,
-            'graph':draw_figure(),
-            'input':Input.objects.last()
         }
     )

@@ -1,7 +1,28 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-{{ input }}
-{{ graph|safe }}
+<h2> Freq domain plot: </h2>
+{{ freq_graph|safe }}
+<h2> Natural Frequencies: </h2>
+{% for n in nat %}
+<tr>
+    <td>Natural frequency {{ forloop.counter }}: {{ n }} Hz </td>
+</tr>
+<br>
+{% endfor %}
+<h2> Damping: </h2>
+{% for damp in damping %}
+<tr>
+    <td>Damping {{ forloop.counter }}: {{ damp }}</td>
+</tr>
+<br>
+{% endfor %}
+<h2> Quality: </h2>
+{% for q in quality %}
+<tr>
+    <td>Quality factor {{ forloop.counter }}: {{ q }}</td>
+</tr>
+<br>
+{% endfor %}
 
 {% endblock %}
