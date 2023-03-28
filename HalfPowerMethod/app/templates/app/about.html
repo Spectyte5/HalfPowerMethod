@@ -1,10 +1,29 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
-
-<p>Use this area to provide additional information.</p>
-
+<h1 id="general-information">General Information</h1>
+<h4 id="gui-web-based-application-for-calculation-of-damping-ratio-for-given-system-based-on-the-half-power-method-and-created-using-django-framework-for-python-">GUI web-based application for calculation of damping ratio for given system based on the half power method and created using django framework for python.</h4>
+<h2 id="installation">Installation</h2>
+<p>To use the app you need to:</p>
+<ol>
+    <li>
+        Clone repository using:<pre><code> git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/Spectyte5/HalfPowerMethod.git
+</code></pre>
+    </li>
+    <li>Make sure you have all modules required (check requirements.txt)</li>
+    <li>Run Django server and enjoy the app.</li>
+</ol>
+<h2 id="pages">Pages</h2>
+<p>There are four different subpages:</p>
+<ol>
+    <li>Home - homepage with general information and links.</li>
+    <li>App - main section, used to input data and show result.</li>
+    <li>About - is the documentation you are viewing.</li>
+    <li>Contact - this section has information about the author.</li>
+</ol>
+<h2 id="how-to-use-it-">How to use it?</h2>
+<p>Data input has two parameters that correspond to transfer function from <em>scipy</em> module for python and should be passed in descending exponent order without brackets and seperated by spaces.</p>
+<h3 id="example-">Example:</h3>
+<p>-<strong>Numerator:</strong> 1 -3 which corresponds to s - 3</p>
+<p>-<strong>Denominator:</strong>  1 0.4 1 which corresponds to s^2 + 0.4s + 1</p>
 {% endblock %}
