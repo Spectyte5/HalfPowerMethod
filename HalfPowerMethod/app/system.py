@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.signal import find_peaks
 from scipy import signal
 import matplotlib.pyplot as plt
 from io import StringIO
@@ -19,17 +18,18 @@ class System:
     
     def calc_damping(self):
         mag = np.abs(self.fft)
-        idx = np.argmax(mag)
-        mag_half = mag[idx] / np.sqrt(2)
-        idx_left = np.argmin(np.abs(mag[:idx] - mag_half)) 
-        idx_right = np.argmin(np.abs(mag[idx:] - mag_half)) + idx 
-        f1, f2 = self.freq[idx_left], self.freq[idx_right]
-        freq_nat = self.freq[idx]
-        Q = freq_nat / (f2 - f1)
-        damp = 1 / (2 * Q)
-        self.nat.append(freq_nat)
-        self.q.append(Q)
-        self.damping.append(damp)
+        peaks,_ = signal.find_peaks(mag)
+        for idx in peaks:
+            mag_half = mag[idx] / np.sqrt(2)
+            idx_left = np.argmin(np.abs(mag[:idx] - mag_half)) 
+            idx_right = np.argmin(np.abs(mag[idx:] - mag_half)) + idx 
+            f1, f2 = self.freq[idx_left], self.freq[idx_right]
+            freq_nat = self.freq[idx]
+            Q = freq_nat / (f2 - f1)
+            damp = 1 / (2 * Q)
+            self.nat.append(freq_nat)
+            self.q.append(Q)
+            self.damping.append(damp)
 
 def draw_figure(x,y):
 
