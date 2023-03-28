@@ -69,6 +69,9 @@
     </Content>
     <Content Include="app\templates\app\result.html" />
     <Content Include="app\templates\app\app.html" />
+    <Content Include="HalfPowerMethod\.env">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="requirements.txt" />
     <Content Include="app\static\app\content\bootstrap.css" />
     <Content Include="app\static\app\content\bootstrap.min.css" />
