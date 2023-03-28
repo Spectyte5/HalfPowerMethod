@@ -18,7 +18,3 @@ class CreateNewList(forms.Form):
     # transfer function:
     Numerator = forms.CharField(max_length=20)
     Denominator = forms.CharField(max_length=20)
-    # Frequency
-    Freq_start = forms.FloatField()
-    Freq_stop = forms.FloatField()
-    Samples = forms.IntegerField()

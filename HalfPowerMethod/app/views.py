@@ -47,9 +47,6 @@ def app(request):
             # load data from input
             Num = form.cleaned_data["Numerator"]
             Den = form.cleaned_data["Denominator"]
-            Freq0 = form.cleaned_data["Freq_start"]
-            Freq1 = form.cleaned_data["Freq_stop"]
-            N = form.cleaned_data["Samples"]
             num = []
             den = []
             # parse data
@@ -60,9 +57,8 @@ def app(request):
                 den_double = float(s)
                 den.append(den_double)
             sys = signal.TransferFunction(num, den)
-            freq = np.logspace(Freq0, Freq1, N)
             # create object
-            system1 = System(sys,freq)
+            system1 = System(sys)
             # calculate damping
             system1.calc_damping()
             return render(

@@ -6,9 +6,8 @@ from io import StringIO
 
 class System: 
 
-    def __init__(self,sys,freq_range):
-        self.freq = freq_range
-        _, self.fft = signal.freqresp(sys, 2 * np.pi * freq_range)
+    def __init__(self,sys):
+        self.freq, self.fft = signal.freqresp(sys)
         self.q = []
         self.damping = []
         self.nat = []
@@ -22,8 +21,8 @@ class System:
         mag = np.abs(self.fft)
         idx = np.argmax(mag)
         mag_half = mag[idx] / np.sqrt(2)
-        idx_left = np.argmin(np.abs(mag[:idx] - mag_half)) if idx > 0 else 0
-        idx_right = np.argmin(np.abs(mag[idx:] - mag_half)) + idx if idx < len(mag)-1 else len(mag)-1
+        idx_left = np.argmin(np.abs(mag[:idx] - mag_half)) 
+        idx_right = np.argmin(np.abs(mag[idx:] - mag_half)) + idx 
         f1, f2 = self.freq[idx_left], self.freq[idx_right]
         freq_nat = self.freq[idx]
         Q = freq_nat / (f2 - f1)
@@ -36,7 +35,7 @@ def draw_figure(x,y):
 
     fig = plt.figure()
     plt.plot(x,y)
-    plt.xlabel("Freq (Hz)")
+    plt.xlabel("Freq (Rad/s)")
     plt.ylabel("Magnitude (a.u)")
 
     imgdata = StringIO()
