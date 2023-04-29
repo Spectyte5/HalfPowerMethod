@@ -37,9 +37,10 @@ def draw_figure(x,y):
     plt.plot(x,y)
     plt.xlabel("Freq (Rad/s)")
     plt.ylabel("Magnitude (a.u)")
+    plt.title("Frequency Response of the system")
 
     imgdata = StringIO()
-    fig.savefig(imgdata, format='svg')
+    fig.savefig(imgdata, format='svg', transparent=True)
     imgdata.seek(0)
 
     data = imgdata.getvalue()

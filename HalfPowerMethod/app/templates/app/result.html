@@ -1,23 +1,21 @@
 {% extends "app/layout.html" %}
-
 {% block content %}
-<h2> Freq domain plot: </h2>
 {{ freq_graph|safe }}
-<h2> Natural Frequencies: </h2>
+<h3> Natural Frequencies: </h3>
 {% for n in nat %}
 <tr>
     <td>&omega;<sub>{{ forloop.counter }}</sub> = {{ n }} Rad/s </td>
 </tr>
 <br>
 {% endfor %}
-<h2> Damping Ratios: </h2>
+<h3> Damping Ratios: </h3>
 {% for damp in damping %}
 <tr>
     <td>&zeta;<sub>{{ forloop.counter }}</sub> = {{ damp }}</td>
 </tr>
 <br>
 {% endfor %}
-<h2> Quality Factors: </h2>
+<h3> Quality Factors: </h3>
 {% for q in quality %}
 <tr>
     <td>Q<sub>{{ forloop.counter }}</sub> = {{ q }}</td>
