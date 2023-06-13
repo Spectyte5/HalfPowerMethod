@@ -35,9 +35,6 @@
   <ItemGroup>
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
-    <Compile Include="app\halfpower.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="app\system.py">
       <SubType>Code</SubType>
     </Compile>

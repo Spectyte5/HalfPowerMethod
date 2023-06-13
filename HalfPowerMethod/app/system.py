@@ -7,6 +7,7 @@ class System:
 
     def __init__(self,sys):
         self.freq, self.fft = signal.freqresp(sys)
+        self.mag = np.abs(self.fft)
         self.q = []
         self.damping = []
         self.nat = []
@@ -17,12 +18,11 @@ class System:
         return fig
     
     def calc_damping(self):
-        mag = np.abs(self.fft)
-        peaks,_ = signal.find_peaks(mag)
+        peaks,_ = signal.find_peaks(self.mag)
         for idx in peaks:
-            mag_half = mag[idx] / np.sqrt(2)
-            idx_left = np.argmin(np.abs(mag[:idx] - mag_half)) 
-            idx_right = np.argmin(np.abs(mag[idx:] - mag_half)) + idx 
+            mag_half = self.mag[idx] / np.sqrt(2)
+            idx_left = np.argmin(np.abs(self.mag[:idx] - mag_half)) 
+            idx_right = np.argmin(np.abs(self.mag[idx:] - mag_half)) + idx 
             f1, f2 = self.freq[idx_left], self.freq[idx_right]
             freq_nat = self.freq[idx]
             Q = freq_nat / (f2 - f1)
@@ -32,7 +32,6 @@ class System:
             self.damping.append(damp)
 
 def draw_figure(x,y):
-
     fig = plt.figure()
     plt.plot(x,y)
     plt.xlabel("Freq (Rad/s)")
