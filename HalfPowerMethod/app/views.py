@@ -66,7 +66,7 @@ def app(request):
                         'title':'Result',
                         'message':'Your result page.',
                         'year':datetime.now().year,
-                        'freq_graph': draw_figure(system1.freq, system1.fft),
+                        'freq_graph': system1.draw_figure(),
                         'nat': system1.nat,
                         'quality': system1.q,
                         'damping': system1.damping

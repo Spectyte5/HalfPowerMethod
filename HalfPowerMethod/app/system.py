@@ -11,6 +11,7 @@ class System:
         self.q = []
         self.damping = []
         self.nat = []
+        self.peaks = []
  
     def my_figure():
         fig, ax = plt.subplots()
@@ -18,8 +19,8 @@ class System:
         return fig
     
     def calc_damping(self):
-        peaks,_ = signal.find_peaks(self.mag)
-        for idx in peaks:
+        self.peaks,_ = signal.find_peaks(self.mag)
+        for idx in self.peaks:
             mag_half = self.mag[idx] / np.sqrt(2)
             idx_left = np.argmin(np.abs(self.mag[:idx] - mag_half)) 
             idx_right = np.argmin(np.abs(self.mag[idx:] - mag_half)) + idx 
@@ -31,16 +32,16 @@ class System:
             self.q.append(Q)
             self.damping.append(damp)
 
-def draw_figure(x,y):
-    fig = plt.figure()
-    plt.plot(x,y)
-    plt.xlabel("Freq (Rad/s)")
-    plt.ylabel("Magnitude (a.u)")
-    plt.title("Frequency Response of the system")
-
-    imgdata = StringIO()
-    fig.savefig(imgdata, format='svg', transparent=True)
-    imgdata.seek(0)
-
-    data = imgdata.getvalue()
-    return data
+    def draw_figure(self):
+        fig = plt.figure()
+        plt.plot(self.freq,self.mag)
+        idx = self.peaks
+        plt.plot(self.freq[idx], self.mag[idx], "+")
+        plt.xlabel("Freq (Rad/s)")
+        plt.ylabel("Magnitude (a.u)")
+        plt.title("Frequency Response of the system")
+        imgdata = StringIO()
+        fig.savefig(imgdata, format='svg', transparent=True)
+        imgdata.seek(0)
+        data = imgdata.getvalue()
+        return data
